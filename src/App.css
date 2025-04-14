@@ -80,10 +80,6 @@ th {
 tr{
   color: black;
 }
-tr:hover {
-  background-color: plum;
-}
-
 @media (max-width: 600px) {
   form {
     flex-direction: column;
