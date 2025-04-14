@@ -2,33 +2,33 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import ExpenseTable from './components/ExpenseTable'
+import ExpenseForm from './components/ExpenseForm'
+import SearchBar from './components/SearchBar'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [expenses, setExpenses] = useState([]);
+const [search, setSearch] = useState("");
+
+const addExpense = (newExpense) => {
+  setExpenses([...expenses, newExpense]);
+};
+
+const filteredExpenses = expenses.filter((expense) =>
+  expense.description.toLowerCase().includes(search.toLowerCase())
+);
+const [count, setCount] = useState(0)
+
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="card">
+  <h2>Expense Tracker</h2>
+      <SearchBar search={search} setSearch={setSearch}/>
+      <ExpenseForm addExpense={addExpense} />
+      <ExpenseTable expenses={filteredExpenses} />
+</div>
+   </>
   )
 }
 
