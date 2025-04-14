@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function ExpenseTable({ expenses }) {
+ function ExpenseTable({ expenses }) {
   return (
     <table>
       <thead>
@@ -22,3 +22,4 @@ export default function ExpenseTable({ expenses }) {
     </table>
   );
 }
+ export default ExpenseTable;

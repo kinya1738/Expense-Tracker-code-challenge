@@ -1,4 +1,4 @@
-export default function SearchBar({ searchTerm, setSearchTerm }) {
+ function SearchBar({ searchTerm, setSearchTerm }) {
   return (
     <div className="search-bar">
     <input
@@ -10,3 +10,4 @@ export default function SearchBar({ searchTerm, setSearchTerm }) {
     </div>
   );
 }
+export default SearchBar;
