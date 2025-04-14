@@ -1,14 +1,12 @@
-
-function SearchBar({ search, setSearch }) {
-    return (
-      <input
-        type="text"
-        placeholder="Search by description"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        />
-    );
-  }
-  
-  export default SearchBar;
-  
+export default function SearchBar({ searchTerm, setSearchTerm }) {
+  return (
+    <div className="search-bar">
+    <input
+      type="text"
+      placeholder="Search expenses..."
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+    />
+    </div>
+  );
+}

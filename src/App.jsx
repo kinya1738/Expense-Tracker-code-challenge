@@ -6,30 +6,32 @@ import ExpenseTable from './components/ExpenseTable'
 import ExpenseForm from './components/ExpenseForm'
 import SearchBar from './components/SearchBar'
 
+
 function App() {
-  const [expenses, setExpenses] = useState([]);
-const [search, setSearch] = useState("");
+  const [expenses, setExpenses] = useState([
+    { id: 1, description: 'Groceries', amount: 50, category: 'Food' },
+    { id: 2, description: 'Electricity', amount: 100, category: 'Utilities' },
+    { id: 3, description: 'Movie tickets', amount: 25, category: 'Entertainment' },
+  ]);
+  const [searchTerm, setSearchTerm] = useState('');
 
-const addExpense = (newExpense) => {
-  setExpenses([...expenses, newExpense]);
-};
+  const addExpense = (expense) => {
+    setExpenses([...expenses, { ...expense, id: expenses.length + 1 }]);
+  };
 
-const filteredExpenses = expenses.filter((expense) =>
-  expense.description.toLowerCase().includes(search.toLowerCase())
-);
-const [count, setCount] = useState(0)
-
+  const filteredExpenses = expenses.filter(expense =>
+    expense.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    expense.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <>
-    <div className="card">
-  <h2>Expense Tracker</h2>
-      <SearchBar search={search} setSearch={setSearch}/>
+    <div className="app">
+      <h1>Expense Tracker</h1>
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <ExpenseForm addExpense={addExpense} />
       <ExpenseTable expenses={filteredExpenses} />
-</div>
-   </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

@@ -1,69 +1,45 @@
-import { useState } from "react";
-import "../App.css";
+import { useState } from 'react';
 
-
-
-function ExpenseForm({ addExpense }) {
+export default function ExpenseForm({ addExpense }) {
   const [formData, setFormData] = useState({
-    description: "",
-    amount: "",
-    category: "",
-    date: "",
+    description: '',
+    amount: '',
+    category: ''
   });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.description || !formData.amount || !formData.category) return;
-    const newExpense = {
+    addExpense({
       ...formData,
-      id: Date.now(),
-    };
-    addExpense(newExpense);
-    setFormData({ description: "", amount: "", category: "" });
+      amount: parseFloat(formData.amount)
+    });
+    setFormData({ description: '', amount: '', category: '' });
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        name="description"
         placeholder="Description"
         value={formData.description}
-        onChange={handleChange}
+        onChange={(e) => setFormData({...formData, description: e.target.value})}
         required
       />
       <input
         type="number"
-        name="amount"
         placeholder="Amount"
         value={formData.amount}
-        onChange={handleChange}
+        onChange={(e) => setFormData({...formData, amount: e.target.value})}
         required
       />
       <input
         type="text"
-        name="category"
         placeholder="Category"
         value={formData.category}
-        onChange={handleChange}
-        required
-      />
-       <input
-        name="date"
-        type="date"
-        value={formData.date}
-        onChange={handleChange}
-        className="form-input"
+        onChange={(e) => setFormData({...formData, category: e.target.value})}
         required
       />
       <button type="submit">Add Expense</button>
     </form>
   );
 }
-
-export default ExpenseForm;
